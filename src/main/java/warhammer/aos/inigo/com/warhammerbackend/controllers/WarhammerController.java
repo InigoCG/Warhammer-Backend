@@ -10,7 +10,7 @@ public class WarhammerController {
 
     @GetMapping("/")
     public static ResponseEntity<String> test() {
-        return new ResponseEntity<>("Hola Mundo!", HttpStatus.OK);
+        return new ResponseEntity<>("Hola Mundoo!", HttpStatus.OK);
     }
 
 }
