@@ -1,10 +1,22 @@
-version: '3.2'
+version: '3.7'
 
 services:
+  java_app:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mariadb
+    command: sh -c './wait-for mariadb:3306 -- npm start'
+
   mariadb:
     image: 'mariadb:11.3.2'
     restart: always
     environment:
+      MARIADB_DATABASE: warhammer
+      MARIADB_USER: inigo
+      MARIADB_PASSWORD: sasa1234
       MARIADB_ROOT_PASSWORD: sasa1234
     ports:
       - 3307:3306
