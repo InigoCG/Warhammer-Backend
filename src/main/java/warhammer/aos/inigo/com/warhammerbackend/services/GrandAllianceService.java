@@ -11,7 +11,7 @@ public interface GrandAllianceService {
 
     Optional<GrandAlliance> findById(Long id);
 
-    Object save(GrandAlliance grandAlliance);
+    GrandAlliance save(GrandAlliance grandAlliance);
 
     Optional<GrandAlliance> update(Long id, GrandAlliance grandAlliance);
 

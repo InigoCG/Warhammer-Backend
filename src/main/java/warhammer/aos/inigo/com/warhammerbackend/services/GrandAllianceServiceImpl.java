@@ -30,7 +30,7 @@ public class GrandAllianceServiceImpl implements GrandAllianceService {
 
     @Transactional
     @Override
-    public Object save(GrandAlliance grandAlliance) {
+    public GrandAlliance save(GrandAlliance grandAlliance) {
         return repository.save(grandAlliance);
     }
 

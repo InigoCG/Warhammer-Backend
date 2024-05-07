@@ -1,8 +1,6 @@
 package warhammer.aos.inigo.com.warhammerbackend.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,54 +18,54 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import warhammer.aos.inigo.com.warhammerbackend.controllers.helpers.ValidationControllerHelper;
-import warhammer.aos.inigo.com.warhammerbackend.models.GrandAlliance;
-import warhammer.aos.inigo.com.warhammerbackend.services.GrandAllianceService;
+import warhammer.aos.inigo.com.warhammerbackend.models.Alliance;
+import warhammer.aos.inigo.com.warhammerbackend.services.AllianceService;
 
 @RestController
-@RequestMapping("/api/grand-alliance")
-public class GrandAllianceController {
+@RequestMapping("/api/alliance")
+public class AllianceController {
 
     @Autowired
-    private GrandAllianceService service;
+    private AllianceService service;
 
     @Autowired
     private ValidationControllerHelper helper;
 
     @GetMapping
-    public List<GrandAlliance> list() {
+    public List<Alliance> list() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findOne(@PathVariable Long id) {
-        Optional<GrandAlliance> grOptional = service.findById(id);
+        Optional<Alliance> aOptional = service.findById(id);
 
-        if (grOptional.isPresent()) {
-            return ResponseEntity.ok(grOptional.orElseThrow());
+        if (aOptional.isPresent()) {
+            return ResponseEntity.ok(aOptional.orElseThrow());
         }
 
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody GrandAlliance grandAlliance, BindingResult result) {
+    public ResponseEntity<?> create(@Valid @RequestBody Alliance alliance, BindingResult result) {
         if (result.hasFieldErrors()) {
             return helper.validation(result);
         }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(grandAlliance));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(alliance));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody GrandAlliance grandAlliance, BindingResult result,
+    public ResponseEntity<?> update(@Valid @RequestBody Alliance alliance, BindingResult result,
             @PathVariable Long id) {
         if (result.hasErrors()) {
             return helper.validation(result);
         }
 
-        Optional<GrandAlliance> grOptional = service.update(id, grandAlliance);
-        if (grOptional.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(grOptional.orElseThrow());
+        Optional<Alliance> aOptional = service.update(id, alliance);
+        if (aOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(aOptional.orElseThrow());
         }
 
         return ResponseEntity.notFound().build();
@@ -75,10 +73,10 @@ public class GrandAllianceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<?> grOptional = service.delete(id);
+        Optional<?> aOptional = service.delete(id);
 
-        if (grOptional.isPresent()) {
-            return ResponseEntity.ok(grOptional.orElseThrow());
+        if (aOptional.isPresent()) {
+            return ResponseEntity.ok(aOptional.orElseThrow());
         }
 
         return ResponseEntity.notFound().build();
