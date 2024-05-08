@@ -1,7 +1,11 @@
 package warhammer.aos.inigo.com.warhammerbackend.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -9,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "unit")
@@ -21,22 +26,22 @@ public class Unit {
     @NotBlank
     private String name;
 
-    @NotBlank
+    @NotNull
     private Integer move;
 
-    @NotBlank
+    @NotNull
     private Integer save;
 
-    @NotBlank
+    @NotNull
     private Integer bravery;
 
-    @NotBlank
+    @NotNull
     private Integer wound;
 
-    @NotBlank
+    @NotNull
     private Integer size;
 
-    @NotBlank
+    @NotNull
     private Integer points;
 
     @Column(name = "role_in_battle")
@@ -44,8 +49,10 @@ public class Unit {
 
     private String notes;
 
-    @ManyToOne
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "alliance_id")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Alliance alliance;
 
     public Long getId() {

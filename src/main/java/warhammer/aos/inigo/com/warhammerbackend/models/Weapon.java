@@ -1,7 +1,11 @@
 package warhammer.aos.inigo.com.warhammerbackend.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +18,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "weapon")
 public class Weapon {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,6 +30,7 @@ public class Weapon {
     private String name;
 
     @NotNull
+    @Column(name = "attack_range")
     private Integer range;
 
     @NotNull
@@ -44,9 +49,11 @@ public class Weapon {
 
     @NotNull
     private Integer damage;
-
-    @ManyToOne
+    
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "unit_id")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Unit unit;
 
     public Long getId() {
@@ -128,5 +135,7 @@ public class Weapon {
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
+
+    
 
 }
