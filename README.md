@@ -1,5 +1,7 @@
 # Warhammer Backend
 
+> An unnoficial AoS REST API built with Spring Boot and MariaDB
+
 ## Deploy
 
  ./mvnw clean package -DskipTests
