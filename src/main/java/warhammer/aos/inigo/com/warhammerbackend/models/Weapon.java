@@ -34,7 +34,7 @@ public class Weapon {
     private Integer range;
 
     @NotNull
-    private Integer attack;
+    private Integer attacks;
 
     @NotNull
     @Column(name = "to_hit")
@@ -88,12 +88,12 @@ public class Weapon {
         this.range = range;
     }
 
-    public Integer getAttack() {
-        return attack;
+    public Integer getAttacks() {
+        return attacks;
     }
 
-    public void setAttack(Integer attack) {
-        this.attack = attack;
+    public void setAttacks(Integer attack) {
+        this.attacks = attack;
     }
 
     public Integer getToHit() {

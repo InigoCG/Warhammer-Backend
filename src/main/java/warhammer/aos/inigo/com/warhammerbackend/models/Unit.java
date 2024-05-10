@@ -36,7 +36,7 @@ public class Unit {
     private Integer bravery;
 
     @NotNull
-    private Integer wound;
+    private Integer wounds;
 
     @NotNull
     private Integer size;
@@ -95,12 +95,12 @@ public class Unit {
         this.bravery = bravery;
     }
 
-    public Integer getWound() {
-        return wound;
+    public Integer getWounds() {
+        return wounds;
     }
 
-    public void setWound(Integer wound) {
-        this.wound = wound;
+    public void setWounds(Integer wound) {
+        this.wounds = wound;
     }
 
     public Integer getSize() {

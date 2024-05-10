@@ -3,6 +3,7 @@ package warhammer.aos.inigo.com.warhammerbackend.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +25,9 @@ public class Alliance {
 
     @NotBlank
     private String name;
+
+    @Column(name = "sub_faction")
+    private String subFaction;
 
     private String clan;
 
@@ -63,6 +67,14 @@ public class Alliance {
 
     public void setClan(String clan) {
         this.clan = clan;
+    }
+
+    public String getSubFaction() {
+        return subFaction;
+    }
+
+    public void setSubFaction(String subFaction) {
+        this.subFaction = subFaction;
     }
 
 }

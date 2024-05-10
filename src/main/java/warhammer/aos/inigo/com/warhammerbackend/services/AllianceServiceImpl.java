@@ -44,6 +44,8 @@ public class AllianceServiceImpl implements AllianceService {
 
             alli.setName(alliance.getName());
             alli.setGrandAlliance(alliance.getGrandAlliance());
+            alli.setClan(alliance.getClan());
+            alli.setSubFaction(alliance.getSubFaction());
 
             return Optional.of(repository.save(alli));
         }

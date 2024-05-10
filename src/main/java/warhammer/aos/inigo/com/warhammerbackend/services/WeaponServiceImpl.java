@@ -44,7 +44,7 @@ public class WeaponServiceImpl implements WeaponService {
 
             weap.setName(weapon.getName());
             weap.setMelee(weapon.getMelee());
-            weap.setAttack(weapon.getAttack());
+            weap.setAttacks(weapon.getAttacks());
             weap.setRange(weapon.getRange());
             weap.setToHit(weapon.getToHit());
             weap.setToWound(weapon.getToWound());

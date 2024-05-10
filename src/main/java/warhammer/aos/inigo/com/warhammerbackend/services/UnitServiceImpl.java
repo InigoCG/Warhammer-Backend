@@ -45,7 +45,7 @@ public class UnitServiceImpl implements UnitService {
             uni.setName(unit.getName());
             uni.setSave(unit.getSave());
             uni.setMove(unit.getMove());
-            uni.setWound(unit.getWound());
+            uni.setWounds(unit.getWounds());
             uni.setBravery(unit.getBravery());
             uni.setSize(unit.getSize());
             uni.setPoints(unit.getPoints());
