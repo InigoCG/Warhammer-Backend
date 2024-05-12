@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import warhammer.aos.inigo.com.warhammerbackend.controllers.api.helpers.ValidationControllerHelper;
+import warhammer.aos.inigo.com.warhammerbackend.controllers.helpers.ValidationControllerHelper;
 import warhammer.aos.inigo.com.warhammerbackend.models.api.Weapon;
 import warhammer.aos.inigo.com.warhammerbackend.services.api.WeaponService;
 

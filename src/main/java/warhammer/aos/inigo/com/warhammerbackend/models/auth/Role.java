@@ -6,8 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import warhammer.aos.inigo.com.warhammerbackend.enums.Roles;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "role")
@@ -18,13 +17,13 @@ public class Role {
     private Long id;
 
     @Column(unique = true)
-    @NotNull
-    private Roles name;
+    @NotBlank
+    private String name;
 
     public Role() {
     }
 
-    public Role(Roles name) {
+    public Role(String name) {
         this.name = name;
     }
 
@@ -36,11 +35,11 @@ public class Role {
         this.id = id;
     }
 
-    public Roles getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Roles name) {
+    public void setName(String name) {
         this.name = name;
     }
 

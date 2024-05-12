@@ -1,4 +1,4 @@
-package warhammer.aos.inigo.com.warhammerbackend.controllers.api.helpers;
+package warhammer.aos.inigo.com.warhammerbackend.controllers.helpers;
 
 import java.util.HashMap;
 import java.util.Map;
