@@ -1,8 +1,12 @@
 package warhammer.aos.inigo.com.warhammerbackend.models.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -54,6 +59,25 @@ public class Unit {
     @JoinColumn(name = "alliance_id")
     @JsonProperty(access = Access.WRITE_ONLY)
     private Alliance alliance;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "unit")
+    private List<Ability> abilities;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "unit")
+    private List<KeyName> keyNames;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "unit")
+    private List<UnitKit> unitKits;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "unit")
+    private List<Weapon> weapons;
+
+    public Unit() {
+        abilities = new ArrayList<>();
+        keyNames = new ArrayList<>();
+        unitKits = new ArrayList<>();
+        weapons = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -141,6 +165,38 @@ public class Unit {
 
     public void setAlliance(Alliance alliance) {
         this.alliance = alliance;
+    }
+
+    public List<Ability> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<Ability> abilities) {
+        this.abilities = abilities;
+    }
+
+    public List<KeyName> getKeyNames() {
+        return keyNames;
+    }
+
+    public void setKeyNames(List<KeyName> keyNames) {
+        this.keyNames = keyNames;
+    }
+
+    public List<UnitKit> getUnitKits() {
+        return unitKits;
+    }
+
+    public void setUnitKits(List<UnitKit> unitKits) {
+        this.unitKits = unitKits;
+    }
+
+    public List<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(List<Weapon> weapons) {
+        this.weapons = weapons;
     }
 
 }

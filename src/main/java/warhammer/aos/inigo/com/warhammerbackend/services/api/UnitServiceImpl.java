@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import warhammer.aos.inigo.com.warhammerbackend.models.api.Unit;
-import warhammer.aos.inigo.com.warhammerbackend.models.api.dto.UnitDto;
 import warhammer.aos.inigo.com.warhammerbackend.repositories.api.UnitRepository;
 
 @Service
@@ -72,7 +71,7 @@ public class UnitServiceImpl implements UnitService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UnitDto> findCompletedUnit(Long id) {
+    public Optional<Unit> findCompletedUnit(Long id) {
         return repository.findCompletedUnit(id);
     }
 
