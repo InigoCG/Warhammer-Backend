@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import warhammer.aos.inigo.com.warhammerbackend.controllers.helpers.ValidationControllerHelper;
 import warhammer.aos.inigo.com.warhammerbackend.models.api.Unit;
+import warhammer.aos.inigo.com.warhammerbackend.models.api.dto.UnitDto;
 import warhammer.aos.inigo.com.warhammerbackend.services.api.UnitService;
 
 @RestController
@@ -76,6 +77,17 @@ public class UnitController {
 
         if (uOptional.isPresent()) {
             return ResponseEntity.ok(uOptional.orElseThrow());
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/complete/{id}")
+    public ResponseEntity<?> findCompletedUnit(@PathVariable Long id) {
+        Optional<UnitDto> fOptional = service.findCompletedUnit(id);
+
+        if (fOptional.isPresent()) {
+            return ResponseEntity.ok(fOptional.orElseThrow());
         }
 
         return ResponseEntity.notFound().build();

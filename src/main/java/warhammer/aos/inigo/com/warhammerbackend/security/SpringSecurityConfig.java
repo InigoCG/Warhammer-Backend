@@ -83,7 +83,8 @@ public class SpringSecurityConfig {
                                                                 "/api/ability",
                                                                 "/api/key-name",
                                                                 "/api/unit-kit",
-                                                                "/api/weapon")
+                                                                "/api/weapon",
+                                                                "/api/unit/complete/{id}")
                                                 .hasAnyRole(Roles.ADMIN.name(), Roles.USER.name())
                                                 .anyRequest()
                                                 .authenticated())
