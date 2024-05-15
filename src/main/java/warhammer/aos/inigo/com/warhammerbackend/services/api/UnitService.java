@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import warhammer.aos.inigo.com.warhammerbackend.models.api.Unit;
+import warhammer.aos.inigo.com.warhammerbackend.models.api.dto.UnitDto;
 
 public interface UnitService {
-    
+
     List<Unit> findAll();
 
     Optional<Unit> findById(Long id);
@@ -17,6 +18,8 @@ public interface UnitService {
 
     Optional<Unit> delete(Long id);
 
-    Optional<Unit> findCompletedUnit(Long id);
+    Optional<UnitDto> findOneUnit(Long id);
+
+    List<UnitDto> findAllUnits();
 
 }

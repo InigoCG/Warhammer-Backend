@@ -84,6 +84,7 @@ public class SpringSecurityConfig {
                                                                 "/api/key-name",
                                                                 "/api/unit-kit",
                                                                 "/api/weapon",
+                                                                "/api/unit/complete",
                                                                 "/api/unit/complete/{id}")
                                                 .hasAnyRole(Roles.ADMIN.name(), Roles.USER.name())
                                                 .anyRequest()
@@ -97,6 +98,5 @@ public class SpringSecurityConfig {
         }
 
 }
-
 
 // TODO: Para la conexión con el Frontend mirar vídeo 215 de CORS
