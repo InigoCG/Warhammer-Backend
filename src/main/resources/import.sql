@@ -1,0 +1,1 @@
+INSERT INTO grand_alliance (name) VALUES ('Destruction');
