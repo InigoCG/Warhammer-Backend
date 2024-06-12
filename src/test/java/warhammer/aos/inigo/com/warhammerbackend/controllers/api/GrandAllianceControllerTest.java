@@ -6,14 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static warhammer.aos.inigo.com.warhammerbackend.resources.DataUrls.*;
+import static warhammer.aos.inigo.com.warhammerbackend.resources.Data.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +27,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import warhammer.aos.inigo.com.warhammerbackend.controllers.helpers.ValidationControllerHelper;
 import warhammer.aos.inigo.com.warhammerbackend.models.api.GrandAlliance;
-import warhammer.aos.inigo.com.warhammerbackend.resources.Data;
 import warhammer.aos.inigo.com.warhammerbackend.services.api.GrandAllianceService;
 
 @WebMvcTest(controllers = GrandAllianceController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
@@ -55,12 +52,12 @@ public class GrandAllianceControllerTest {
         void testList() throws Exception {
                 // Given
                 List<GrandAlliance> grandAlliances = Arrays.asList(
-                                Data.createGrandAlliance1().orElseThrow(),
-                                Data.createGrandAlliance2().orElseThrow());
+                                createGrandAlliance1().orElseThrow(),
+                                createGrandAlliance2().orElseThrow());
 
                 // When
                 when(service.findAll()).thenReturn(grandAlliances);
-                mockMvc.perform(get("/api/grand-alliance").contentType(MediaType.APPLICATION_JSON))
+                mockMvc.perform(get(grandAllianceUrl()).contentType(MediaType.APPLICATION_JSON))
 
                                 // Then
                                 .andExpect(status().isOk())
@@ -81,8 +78,9 @@ public class GrandAllianceControllerTest {
                 Long badId = 2L;
 
                 // When
-                when(service.findById(id)).thenReturn(Data.createGrandAlliance1());
-                mockMvc.perform(get("/api/grand-alliance/{id}", id).contentType(MediaType.APPLICATION_JSON))
+                when(service.findById(id)).thenReturn(createGrandAlliance1());
+                mockMvc.perform(get(grandAllianceUrl().concat("/{id}"), id)
+                                .contentType(MediaType.APPLICATION_JSON))
 
                                 // Then
                                 .andExpect(status().isOk())
@@ -92,7 +90,7 @@ public class GrandAllianceControllerTest {
                 verify(service).findById(anyLong());
 
                 // When
-                mockMvc.perform(get("/api/grand-alliance/{id}", badId))
+                mockMvc.perform(get(grandAllianceUrl().concat("/{id}"), badId))
 
                                 // Then
                                 .andExpect(status().isNotFound());
@@ -101,7 +99,7 @@ public class GrandAllianceControllerTest {
         @Test
         void testCreate() throws JsonProcessingException, Exception {
                 // Given
-                GrandAlliance grandAlliance = Data.createGrandAlliance1().orElseThrow();
+                GrandAlliance grandAlliance = createGrandAlliance1().orElseThrow();
 
                 // When
                 when(service.save(any())).then(invocation -> {
@@ -109,7 +107,7 @@ public class GrandAllianceControllerTest {
                         g.setId(1L);
                         return g;
                 });
-                mockMvc.perform(post("/api/grand-alliance").contentType(MediaType.APPLICATION_JSON)
+                mockMvc.perform(post(grandAllianceUrl()).contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(grandAlliance)))
 
                                 // Then
@@ -126,7 +124,7 @@ public class GrandAllianceControllerTest {
                 // Given
                 Long id = 1L;
                 Long badId = 2L;
-                GrandAlliance grandAlliance = Data.createGrandAlliance1().orElseThrow();
+                GrandAlliance grandAlliance = createGrandAlliance1().orElseThrow();
 
                 GrandAlliance grandAllianceUpdated = GrandAlliance.builder()
                                 .id(id)
@@ -145,7 +143,7 @@ public class GrandAllianceControllerTest {
 
                         return Optional.empty();
                 });
-                mockMvc.perform(put("/api/grand-alliance/{id}", id)
+                mockMvc.perform(put(grandAllianceUrl().concat("/{id}"), id)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(grandAllianceUpdated)))
 
@@ -157,7 +155,7 @@ public class GrandAllianceControllerTest {
                 verify(service).update(eq(id), any());
 
                 // When
-                mockMvc.perform(put("/api/grand-alliance/{id}", badId)
+                mockMvc.perform(put(grandAllianceUrl().concat("/{id}"), badId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(grandAllianceUpdated)))
 
@@ -172,8 +170,8 @@ public class GrandAllianceControllerTest {
                 Long badId = 2L;
 
                 // When
-                when(service.delete(eq(id))).thenReturn(Data.createGrandAlliance1());
-                mockMvc.perform(delete("/api/grand-alliance/{id}", id)
+                when(service.delete(eq(id))).thenReturn(createGrandAlliance1());
+                mockMvc.perform(delete(grandAllianceUrl().concat("/{id}"), id)
                                 .contentType(MediaType.APPLICATION_JSON))
 
                                 // Then
@@ -183,7 +181,7 @@ public class GrandAllianceControllerTest {
                 verify(service).delete(eq(id));
 
                 // When
-                mockMvc.perform(delete("/api/grand-alliance/{id}", badId))
+                mockMvc.perform(delete(grandAllianceUrl().concat("/{id}"), badId))
                                 .andExpect(status().isNotFound());
 
         }
